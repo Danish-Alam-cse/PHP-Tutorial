@@ -1,80 +1,56 @@
-<?php
-    $con = mysqli_connect("localhost","root","","college");
-    if(!$con){
-        echo "nhi hua";
-    }
-?>
+<?php include('config.php');?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Php Mysqli Crud</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <title>Document</title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
-        <a href="" class="navbar-brand">PHP MYSQLI CRUD</a>
-    </nav>
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-lg-4">
-              <form action="" method="POST">
-                <div class="form-group">
-                    <label for="">Name</label>
-                    <input type="text" name="name" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="">Email</label>
-                    <input type="email" name="email" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="">Address</label>
-                    <textarea name="address" class="form-control"></textarea>
-                </div>
-                <div class="form-group">
-                    <input type="submit" class="btn btn-success form-control" name="register">
-                </div>
-            </form>
-            </div>
-            <div class="col-lg-8">
-                <table class="table table-hover table-striped">
-                    <tr>
-                        <th>Roll</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Address</th>
-                    </tr>
-                    <?php
-                    $res = mysqli_query($con,"select * from students");
-                    while($row = mysqli_fetch_array($res)){?>
-                    <tr>
-                        <td><?= $row['roll'];?></td>
-                        <td><?= $row['name'];?></td>
-                        <td><?= $row['email'];?></td>
-                        <td><?= $row['address'];?></td>
-                    </tr>
-                    <?php } ;?>
-                </table>
-            </div>
-        </div>
-    </div>
+    <form action="" method="post">
+        <label for="">Name</label>
+        <input type="text" name="name">
+        <label for="">Email</label>
+        <input type="email" name="email">
+        <label for="">Address</label>
+        <textarea name="address"></textarea>
+        <input type="submit" name="send">
+    </form>
+
+    <table border="1">
+        <tr>
+            <th>Roll</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>Action</th>
+        </tr>
+        <?php 
+        $fetch = mysqli_query($connect,"select * from students");
+        while($row = mysqli_fetch_array($fetch)){?>
+        <tr>
+            <td><?= $row['roll'];?></td>
+            <td><?= $row['name'];?></td>
+            <td><?= $row['email'];?></td>
+            <td><?= $row['address'];?></td>
+            <td><a href="delete.php?del=<?=$row['roll'];?>">X</a></td>
+        </tr>
+        <?php } ;?>
+    </table>
 </body>
 </html>
-
 <?php
-    if(isset($_POST['register'])){
+    if(isset($_POST['send'])){
         $name = $_POST['name'];
         $email = $_POST['email'];
-        $add = $_POST['address'];
-
-        $result = mysqli_query($con,"insert into students(name,email,address)values('$name','$email','$add')");
+        $address = $_POST['address'];
+        $result = mysqli_query($connect,"insert into students(name,email,address)values('$name','$email','$address')");
         if($result){
-            echo "ho gya";
+            echo "ho gya sir ji";
         }
         else{
-            echo "nhi hua";
+            echo "nhi hi hua";
         }
     }
 ?>
