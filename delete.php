@@ -4,7 +4,7 @@
       $delete_query = mysqli_query($connect,"delete from students where roll='$delete_roll'");
 
       if($delete_query){
-        echo "delete ho gya";
+        header('Location:index.php');
       }
       else{
         echo "delete nhi hua";

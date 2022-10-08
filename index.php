@@ -24,7 +24,8 @@
             <th>Name</th>
             <th>Email</th>
             <th>Address</th>
-            <th>Action</th>
+            <th>Delete</th>
+            <th>Edit</td>
         </tr>
         <?php 
         $fetch = mysqli_query($connect,"select * from students");
@@ -35,6 +36,7 @@
             <td><?= $row['email'];?></td>
             <td><?= $row['address'];?></td>
             <td><a href="delete.php?del=<?=$row['roll'];?>">X</a></td>
+            <td><a href="edit.php?edit=<?=$row['roll'];?>">edit</a></td>
         </tr>
         <?php } ;?>
     </table>
